@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Weshet Filler",
+  "version": "1.0",
+  "description": "Weshet Filler is a lightweight Chrome extension that helps developers, testers, and users quickly fill out online forms with relevant, Ethiopia-specific information. Customize the local data set to fit your exact needs without ever sending data over the network.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["data.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
