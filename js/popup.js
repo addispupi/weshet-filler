@@ -16,14 +16,21 @@ fillFormBtn.addEventListener('click', async () => {
     const randomProfile = profiles[Math.floor(Math.random() * profiles.length)];
 
     // Execute the content script in the active tab
-    // ....
-
-    // Send a message to the content script to fill the form
-    chrome.tabs.sendMessage(activeTab.id, {action: 'fillForm', data: DummyData.profiles[0]}, (response) => {
-        if (response && response.status === 'success') {
-            console.log('Form filled successfully');
-        } else {
-            console.error('Failed to fill form:', response);
-        }
+    chrome.scripting.executeScript({
+        target: {tabId: tab.id}, // inject
+        files: ['js/content.js']
+    },
+    () => {
+        console.log('Content script injected');
+        chrome.tabs.sendMessage(tab.id, {
+            type: "FILL_FORM",
+            data: randomProfile
+        }, (response) => {
+            if (response && response.status === 'success') {
+                console.log('Form filled successfully');
+            } else {
+                console.error('Failed to fill form:', response);
+            }
+        })
     });
 });
