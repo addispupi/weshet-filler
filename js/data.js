@@ -1,6 +1,6 @@
 //  Data entries for a random pick from a list of profiles
 
-const myData = {
+const DummyData = {
     profiles: [
         {
             firstName: "Akalu",
