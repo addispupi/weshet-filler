@@ -27,5 +27,30 @@ function fillForm(data) {
                 }
             }
         }
-    }
+    };
+
+    // Mapping of data fields to keywords
+    findAndFill(['title'], data.title);
+    findAndFill(['first', 'first_name', 'fname','name', 'given-name'], data.firstName);
+    findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
+    findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
+    findAndFill(['sex', 'gender'], data.gender);
+    findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
+    findAndFill(['email', 'e_mail', 'mail'], data.email);
+    findAndFill(['phone', 'mobile', 'cell', 'phone_number'], data.phone);
+    findAndFill(['address', 'addr'], data.address);
+    findAndFill(['country', 'nationality'], data.nationality);
+    findAndFill(['region', 'state'], data.region);
+    findAndFill(['city', 'town'], data.city);
+    findAndFill(['sub_city', 'subcity'], data.subCity);
+    findAndFill(['woreda', 'woreda_no', 'woreda_number'], data.woreda);
+    findAndFill(['house', 'house_no', 'house_number'], data.houseNumber);
+    findAndFill(['zip', 'postal_code', 'postcode'], data.zip);
+
+    findAndFill(['identity_type', 'id_type'], data.identityType);
+    findAndFill(['identity_number', 'id_number'], data.identityNumber);
+    findAndFill(['bank_name', 'bank'], data.bankName);
+    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
+
+    console.log("Weshet Filler: Form filled attempt complete");
 }
