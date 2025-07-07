@@ -47,6 +47,10 @@ function fillForm(data) {
     findAndFill(['house', 'house_no', 'house_number'], data.houseNumber);
     findAndFill(['zip', 'postal_code', 'postcode'], data.zip);
 
+    findAndFill(['contract_type', 'contract'], data.contractType);
+    findAndFill(['issue_date', 'date_of_issue', 'issued'], data.issueDate);
+    findAndFill(['expiry_date', 'date_of_expiry', 'expired'], data.expiryDate);
+
     findAndFill(['identity_type', 'id_type'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
