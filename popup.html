@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weshet Filler</title>
+
+    <!-- fav icons -->
+    <link rel="icon" type="image/png" href="icons/fav/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="icons/fav/favicon.svg" />
+    <link rel="shortcut icon" href="icons/fav/favicon.ico" />
+
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            width: 250px;
-            padding: 10px;
+            width: 60px;
+            padding: 0px;
             text-align: center;
-            background-color: #f9f9f9;
+            background-color: transparent;
         }
         h1 {
             font-size: 18px;
@@ -20,23 +26,24 @@
         button {
             width: 100%;
             padding: 12px;
+            margin: 0;
             font-size: 16px;
             font-weight: bold;
             color: white;
-            background-color: #dc7304;
+            background-color: #b1680a;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #cd9103;
         }
     </style>
 </head>
 <body>
-    <h1>Weshet Filler</h1>
     <button id="fill-form-btn">Fill</button>
-    <script src="js/popup.js"></script>
+
+    <script type="module" src="./js/popup.js"></script>
 </body>
 </html>

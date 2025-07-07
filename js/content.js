@@ -54,7 +54,4 @@ function fillForm(data) {
     findAndFill(['identity_type', 'id_type'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
-    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
-
-    console.log("Weshet Filler: Form filled attempt complete");
-}
+    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);}

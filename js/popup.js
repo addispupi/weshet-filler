@@ -1,7 +1,7 @@
 // Runs in the popup window of the browser extension
 
 // import dummy data from the data.js file
-import {DummyData} from '../js/data.js ';
+import {DummyData} from './data.js';
 
 // Get the button element from the popup HTML
 const fillFormBtn = document.getElementById('fill-form-btn');
@@ -18,10 +18,9 @@ fillFormBtn.addEventListener('click', async () => {
     // Execute the content script in the active tab
     chrome.scripting.executeScript({
         target: {tabId: tab.id}, // inject
-        files: ['js/content.js']
+        files: ['./js/content.js']
     },
     () => {
-        console.log('Content script injected');
         chrome.tabs.sendMessage(tab.id, {
             type: "FILL_FORM",
             data: randomProfile
