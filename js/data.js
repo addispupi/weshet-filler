@@ -32,7 +32,11 @@ function randomNumberString(length) {
     return result;
 }
 
-const titles = ["Mr.", "Ms.", "Mrs.", "Dr.", "Prof.", "PhD.", "Miss.", "Sir.", "Madam"];
+const titlesByGender = {
+    Male: ["Mr.", "Dr.", "Prof.", "PhD.", "Sir."],
+    Female: ["Ms.", "Mrs.", "Dr.", "Prof.", "PhD.", "Miss.", "Madam"]
+};
+
 const contractTypes = ["Contractual", "Freelance", "Full-Time", "Internship", "Outsourced", "Part-Time", "Permanent", "Remote", "Temporary"];
 const bankNames = [
     "Abay Bank", "Addis International Bank", "Ahadu Bank", "Amhara Bank", "Awash International Bank",
@@ -41,10 +45,52 @@ const bankNames = [
     "Lion International Bank", "Nib International Bank", "Omo Bank", "Oromia International Bank", "Rammis Bank",
     "Sidama Bank", "Siinqee Bank", "Tsehay Bank", "United Bank", "Wegagen Bank", "Zemen Bank", "ZamZam Bank"
 ];
-const firstNames = ["Akalu", "Mulu", "Hana", "Samuel", "Liya", "Abebe", "Tigist", "Kebede", "Mekdes", "Yared", "Selam", "Biruk", "Marta", "Dawit", "Ruth", "Fitsum", "Helen", "Daniel", "Saba", "Solomon"];
-const middleNames = ["Kebede", "Tasew", "Gebre", "Alemu", "Bekele", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew"];
-const lastNames = ["Tasew", "Gebremariam", "Alemu", "Bekele", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew", "Abate"];
-const genders = ["Male", "Female"];
+const firstNames = [
+    { name: "Akalu", gender: "Male" },
+    { name: "Abel", gender: "Male" },
+    { name: "Yasin", gender: "Male" },
+    { name: "Natnael", gender: "Male" },
+    { name: "Guta", gender: "Male" },
+    { name: "Kenenisa", gender: "Male" },
+    { name: "Haile", gender: "Male" },
+    { name: "Samuel", gender: "Male" },
+    { name: "Mohamed", gender: "Male" },
+    { name: "Abebe", gender: "Male" },
+    { name: "Kebede", gender: "Male" },
+    { name: "Abdela", gender: "Male" },
+    { name: "Yared", gender: "Male" },
+    { name: "Biruk", gender: "Male" },
+    { name: "Dawit", gender: "Male" },
+    { name: "Daniel", gender: "Male" },
+    { name: "Solomon", gender: "Male" },
+    { name: "Tibebe", gender: "Male" },
+    { name: "Shimeles", gender: "Male" },
+    { name: "Seyfe", gender: "Male" },
+    { name: "Mulu", gender: "Female" },
+    { name: "Mahlet", gender: "Female" },
+    { name: "Hana", gender: "Female" },
+    { name: "Liya", gender: "Female" },
+    { name: "Tigist", gender: "Female" },
+    { name: "Mekdes", gender: "Female" },
+    { name: "Selam", gender: "Female" },
+    { name: "Marta", gender: "Female" },
+    { name: "Bethlehem", gender: "Female" },
+    { name: "Ruth", gender: "Female" },
+    { name: "Fitsum", gender: "Female" },
+    { name: "Helen", gender: "Female" },
+    { name: "Tirunesh", gender: "Female" },
+    { name: "Meseret", gender: "Female" },
+    { name: "Kemila", gender: "Female" },
+    { name: "Nebiyat", gender: "Female" },
+    { name: "Nebiyat", gender: "Female" },
+    { name: "Saba", gender: "Female" },
+    { name: "Medina", gender: "Female" },
+    { name: "Kerima", gender: "Female" },
+    { name: "Fatuma", gender: "Female" },
+];
+const middleNames = ["Kebede", "Tasew", "Gebre", "Biniyam", "Hailemariam", "Habtemariam", "Taye", "Chala", "Caleb", "Tirusew", "Chane", "Alemu", "Bekele", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew"];
+const lastNames = ["Tasew", "Gebremariam", "Habtamu", "W/Mariam", "Gebre", "Alemu", "Bekele", "Ketema", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew", "Abate", "Tekletsadik", "Molla", "Yekuno" ];
+
 const cities = ["Addis Ababa", "Adama", "Bahir Dar", "Hawassa", "Mekelle", "Dire Dawa"];
 const subCities = ["Bole", "Kirkos", "Yeka", "Arada", "Lideta", "Gullele", "Nifas Silk", "Kolfe"];
 const regions = ["Addis Ababa", "Oromia", "Amhara", "Tigray", "SNNPR", "Afar", "Somali", "Benishangul-Gumuz", "Gambela", "Harari", "Sidama"];
@@ -85,12 +131,13 @@ const DummyData = {
 };
 
 // Generate 50 random profiles
-for (let i = 0; i < 50; i++) {
-    const gender = randomFromArray(genders);
-    const firstName = randomFromArray(firstNames);
+for (let i = 0; i < 70; i++) {
+    const firstNameObj = randomFromArray(firstNames);
+    const gender = firstNameObj.gender;
+    const firstName = firstNameObj.name;
+    const title = randomFromArray(titlesByGender[gender]);
     const middleName = randomFromArray(middleNames);
     const lastName = randomFromArray(lastNames);
-    const title = randomFromArray(titles);
     const contractType = randomFromArray(contractTypes);
     const bankName = randomFromArray(bankNames);
     const city = randomFromArray(cities);
@@ -103,12 +150,18 @@ for (let i = 0; i < 50; i++) {
     const houseNumber = randomString(1).toUpperCase() + Math.floor(100 + Math.random() * 900);
     const zip = (1000 + Math.floor(Math.random() * 9000)).toString();
     const birthDate = randomDate(new Date(1970, 0, 1), new Date(2005, 11, 31));
-    const issueDate = randomDate(new Date(2015, 0, 1), new Date(2022, 11, 31));
-    const expiryDate = randomDate(new Date(2025, 0, 1), new Date(2035, 11, 31));
+    const issueDate = randomDate(new Date(2015, 0, 1), new Date(2024, 11, 30));
+    
+    // Generate expiry date between 1 and 6 years from the issue date
+    const now = new Date();
+    const expiryStart = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+    const expiryEnd = new Date(now.getFullYear() + 6, now.getMonth(), now.getDate());
+    const expiryDate = randomDate(expiryStart, expiryEnd);
+
     const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@example.com`;
     const phone = randomPhone();
     const identityNumber = randomNumberString(16);
-    const bankAccountNumber = randomNumberString(16);
+    const bankAccountNumber = randomNumberString(10);
 
     DummyData.profiles.push({
         title,
