@@ -38,20 +38,19 @@
 
 ## Installation
 
-### 1. From the Chrome Web Store (Recommended)
+1. **From the Chrome Web Store `Recommended`**
 Once published, you can easily install Weshet Filler from the official Chrome Web Store.
-
-### 2. For Developers & Contributors (Manual Installation)
+2. **For Developers & Contributors  `Manual Installation`**
 If you want to contribute or test the latest unreleased version:
-  1.  **Clone the repository:**
+    - **Clone the repository:**
       ```bash
       git clone https://github.com/addispupi/weshet-filler.git
       ```
-  2.  **Open Chrome Extensions:** Navigate to `chrome://extensions` in your Chrome browser.
-  3.  **Enable Developer Mode:** Turn on the "Developer mode" toggle in the top-right corner.
-  4.  **Load the Extension:** Click the "Load unpacked" button and select the cloned `weshet-filler` directory.
+    - **Open Chrome Extensions:** Navigate to `chrome://extensions` in your Chrome browser.
+    - **Enable Developer Mode:** Turn on the "Developer mode" toggle in the top-right corner.
+    - **Load the Extension:** Click the "Load unpacked" button and select the cloned `weshet-filler` directory.
 
-## 📖 How to Use
+## How to Use
 1.  Navigate to a web page with a form you want to fill.
 2.  Click the **Weshet Filler icon** in your Chrome toolbar
 3.  Click the **"Fill"** button.
@@ -78,7 +77,7 @@ Contributions are what make the open-source community such an amazing place to l
 Please open an issue first to discuss any major changes you would like to make.
 
 ## License
-This project is distributed under the MIT License. See the `LICENSE` file for more information.
+This project is distributed under the [MIT License](LICENSE). See the `LICENSE` file for more information.
 
 ---
 
