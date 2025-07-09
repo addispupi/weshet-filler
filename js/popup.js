@@ -24,12 +24,6 @@ fillFormBtn.addEventListener('click', async () => {
         chrome.tabs.sendMessage(tab.id, {
             type: "FILL_FORM",
             data: randomProfile
-        }, (response) => {
-            if (response && response.status === 'success') {
-                console.log('Form filled successfully');
-            } else {
-                console.error('Failed to fill form:', response);
-            }
         })
     });
 });

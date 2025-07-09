@@ -7,26 +7,40 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 })
 
 function fillForm(data) {
-    const findAndFill = (keywords, value) => {
-        const allInputs = document.querySelectorAll('input, textarea, select');
+    const findAndFill = (keywords, value, multiFill = false) => {
+        const allInputs = document.querySelectorAll('input, textarea, select, tags');
+        let filledCount = 0;
+
         for (const input of allInputs) {
             const name = (input.name || '').toLowerCase();
             const id = (input.id || '').toLowerCase();
             const placeholder = (input.placeholder || '').toLowerCase();
             const ariaLabel = (input.getAttribute('aria-label') || '').toLowerCase();
 
-            for(const keyword of keywords) {
-                if(name.includes(keyword) || id.includes(keyword) || placeholder.includes(keyword) || ariaLabel.includes(keyword)) {
-                    if(input.offsetParent !== null && input.value == ''){
+            for (const keyword of keywords) {
+                if (
+                    name.includes(keyword) ||
+                    id.includes(keyword) ||
+                    placeholder.includes(keyword) ||
+                    ariaLabel.includes(keyword)
+                ) {
+                    if (input.offsetParent !== null && input.value == '') {
                         input.value = value;
                         input.dispatchEvent(new Event('input', { bubbles: true }));
                         input.dispatchEvent(new Event('change', { bubbles: true }));
-                        console.log(`Filled ${input.name || input.id || 'input'} with value: ${value}`);   // ----
-                        return;
+                        // console.log(`Filled ${input.name || input.id || 'input'} with value: ${value}`);
+                        filledCount++;
+                        if (!multiFill) return; // stop if not multi-fill
+                        break;
                     }
                 }
             }
         }
+
+        if (filledCount === 0) {
+            // console.log(`No matching field found for value: ${value}`);
+        }
+
     };
 
     // Mapping of data fields to keywords
@@ -37,7 +51,10 @@ function fillForm(data) {
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
-    findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], data.phone);
+
+    // Multi-fill for fields like phone number
+    findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], data.phone, true);
+
     findAndFill(['address', 'addr'], data.address);
     findAndFill(['country', 'nationality'], data.nationality);
     findAndFill(['region', 'state'], data.region);
@@ -54,4 +71,5 @@ function fillForm(data) {
     findAndFill(['identity_type', 'id_type', 'identity', 'identity_type_id'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
-    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);}
+    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
+}
