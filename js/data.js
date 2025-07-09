@@ -95,7 +95,7 @@ const cities = ["Addis Ababa", "Adama", "Bahir Dar", "Hawassa", "Mekelle", "Dire
 const subCities = ["Bole", "Kirkos", "Yeka", "Arada", "Lideta", "Gullele", "Nifas Silk", "Kolfe"];
 const regions = ["Addis Ababa", "Oromia", "Amhara", "Tigray", "SNNPR", "Afar", "Somali", "Benishangul-Gumuz", "Gambela", "Harari", "Sidama"];
 const nationalities = ["Ethiopia"];
-const identityTypes = ["National ID", "Passport", "Driver's License"];
+const identityTypes = ["National ID", "Passport", "Driving License", "Residence ID", "Work Permit"];
 const streets = ["Bole Cameron Street", "Africa Avenue", "Churchill Road", "Megenagna", "Piazza", "Mexico Square", "Kazanchis", "CMC Road"];
 
 const DummyData = {

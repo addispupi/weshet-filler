@@ -37,7 +37,7 @@ function fillForm(data) {
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
-    findAndFill(['phone', 'mobile', 'cell', 'phone_number'], data.phone);
+    findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], data.phone);
     findAndFill(['address', 'addr'], data.address);
     findAndFill(['country', 'nationality'], data.nationality);
     findAndFill(['region', 'state'], data.region);
@@ -51,7 +51,7 @@ function fillForm(data) {
     findAndFill(['issue_date', 'date_of_issue', 'issued'], data.issueDate);
     findAndFill(['expiry_date', 'date_of_expiry', 'expired'], data.expiryDate);
 
-    findAndFill(['identity_type', 'id_type'], data.identityType);
+    findAndFill(['identity_type', 'id_type', 'identity', 'identity_type_id'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
     findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);}
