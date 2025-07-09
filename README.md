@@ -1,9 +1,14 @@
-<div align="center">
-  <img src="https://placehold.co/1200x300/078930/FFFFFF?text=Weshet+Filler&font=raleway" alt="Weshet Filler Banner">
-  <h1>Weshet Filler</h1>
-  <p><strong>Instantly fill web forms with realistic, Ethiopian-based samples/dummy data.</strong></p>
-  <p>The perfect tool for developers and testers working with forms tailored for an Ethiopian audience.</p>
-</div>
+<p align="center">
+  
+  <picture>
+    <source srcset="./banner-dark.png" media="(prefers-color-scheme: dark)">
+    <source srcset="./banner.png" media="(prefers-color-scheme: light)">
+    <img src="./banner.png" alt="Weshet Filler Logo">
+  </picture>
+
+  <h2 align="center">Weshet Filler</h2>
+  <p align="center">The perfect tool for developers and testers working with forms tailored for an Ethiopian audience.</p>
+</p>
 
 <div align="center">
   <!-- Badges - Replace placeholders once you have them -->
@@ -16,19 +21,22 @@
   <a href="[YOUR_CHROME_STORE_LINK_HERE]">
     <img src="https://img.shields.io/chrome-web-store/v/your-extension-id?label=chrome%20web%20store&color=green" alt="Chrome Web Store">
   </a>
+
+  [![GitHub stars](https://img.shields.io/github/stars/addispupi/weshet-filler)](https://github.com/addispupi/weshet-filler/stargazers)
+
 </div>
 
 
-## ✨ Features
+## Features
 * **One-Click Filling:** Populate entire forms instantly with a single click.
 * **🇪🇹 Authentic Ethiopian Data:** Uses a rich, customizable library of common Ethiopian names, addresses (including regions, sub-cities, and woredas), phone numbers, and more.
 * **Smart Gender Selection:** Generate data that is logically consistent, with gender-appropriate names and titles ("Mr.", "Ms.", etc.).
 * **Developer Focused:** Perfect for speeding up development and testing of applications that require user registration or data entry.
 * **Privacy First:** All data is stored and processed locally within the extension. Nothing is ever sent over the network.
 
-## 🎥 Demo
+## Demo
 
-## 🚀 Installation
+## Installation
 
 ### 1. From the Chrome Web Store (Recommended)
 Once published, you can easily install Weshet Filler from the official Chrome Web Store.
@@ -49,7 +57,7 @@ If you want to contribute or test the latest unreleased version:
 3.  Click the **"Fill"** button.
 4.  Voilà! The form is filled.
 
-## 🤝 How to Contribute
+## How to Contribute
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1.  **Fork the Project:** Click the 'Fork' button at the top right of this page.
@@ -69,7 +77,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 Please open an issue first to discuss any major changes you would like to make.
 
-## 📜 License
+## License
 This project is distributed under the MIT License. See the `LICENSE` file for more information.
 
 ---
