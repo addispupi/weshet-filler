@@ -37,9 +37,9 @@ function fillForm(data) {
             }
         }
 
-        if (filledCount === 0) {
+        // if (filledCount === 0) {
             // console.log(`No matching field found for value: ${value}`);
-        }
+        // }
 
     };
 
@@ -55,7 +55,7 @@ function fillForm(data) {
     // Multi-fill for fields like phone number
     findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], data.phone, true);
 
-    findAndFill(['address', 'addr'], data.address);
+    findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
     findAndFill(['country', 'nationality'], data.nationality);
     findAndFill(['region', 'state'], data.region);
     findAndFill(['city', 'town'], data.city);

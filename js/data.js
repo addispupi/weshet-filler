@@ -89,7 +89,7 @@ const firstNames = [
     { name: "Fatuma", gender: "Female" },
 ];
 const middleNames = ["Kebede", "Tasew", "Gebre", "Biniyam", "Hailemariam", "Habtemariam", "Taye", "Chala", "Caleb", "Tirusew", "Chane", "Alemu", "Bekele", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew"];
-const lastNames = ["Tasew", "Gebremariam", "Habtamu", "W/Mariam", "Gebre", "Alemu", "Bekele", "Ketema", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew", "Abate", "Tekletsadik", "Molla", "Yekuno" ];
+const lastNames = ["Tasew", "Gebremariam", "Habtamu", "Weldeariam", "Gebre", "Alemu", "Bekele", "Ketema", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew", "Abate", "Tekletsadik", "Molla", "Yekuno" ];
 
 const cities = ["Addis Ababa", "Adama", "Bahir Dar", "Hawassa", "Mekelle", "Dire Dawa"];
 const subCities = ["Bole", "Kirkos", "Yeka", "Arada", "Lideta", "Gullele", "Nifas Silk", "Kolfe"];
