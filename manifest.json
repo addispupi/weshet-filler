@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Weshet Filler",
   "version": "0.1.0",
+  "version_name": "0.1.0 beta 2",
   "description": "A lightweight extension that helps developers, testers, and users quickly fill out online forms with relevant, Ethiopia-specific information.",
   "permissions": [
     "activeTab",
