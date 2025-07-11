@@ -6,6 +6,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 })
 
+function randomPhone() {
+    const prefix = Math.random() < 0.5 ? "+251 9" : "+251 7";
+    return prefix + Math.floor(10000000 + Math.random() * 90000000);
+}
+
 function fillForm(data) {
     const findAndFill = (keywords, value, multiFill = false) => {
         const allInputs = document.querySelectorAll('input, textarea, select, tags');
@@ -25,7 +30,11 @@ function fillForm(data) {
                     ariaLabel.includes(keyword)
                 ) {
                     if (input.offsetParent !== null && input.value == '') {
-                        input.value = value;
+                        let fillValue = value;
+                        if (multiFill && value === null && ['phone','mobile','cell','emergency_contact_number','phone_number'].includes(keyword)) {
+                            fillValue = randomPhone();
+                        }
+                        input.value = fillValue;
                         input.dispatchEvent(new Event('input', { bubbles: true }));
                         input.dispatchEvent(new Event('change', { bubbles: true }));
                         // console.log(`Filled ${input.name || input.id || 'input'} with value: ${value}`);
@@ -45,17 +54,19 @@ function fillForm(data) {
 
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
-    findAndFill(['first', 'first_name', 'fname','name', 'given-name'], data.firstName);
+    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
+    findAndFill(['first', 'first_name', 'fname', 'given-name'], data.firstName);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
+    
+    findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
 
     // Multi-fill for fields like phone number
-    findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], data.phone, true);
+    findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], null, true);
 
-    findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
     findAndFill(['country', 'nationality'], data.nationality);
     findAndFill(['region', 'state'], data.region);
     findAndFill(['city', 'town'], data.city);
@@ -63,6 +74,7 @@ function fillForm(data) {
     findAndFill(['woreda', 'woreda_no', 'woreda_number'], data.woreda);
     findAndFill(['house', 'house_no', 'house_number'], data.houseNumber);
     findAndFill(['zip', 'postal_code', 'postcode'], data.zip);
+    findAndFill(['location', 'location_name', 'branch', 'branch_name'], data.location);
 
     findAndFill(['contract_type', 'contract'], data.contractType);
     findAndFill(['issue_date', 'date_of_issue', 'issued'], data.issueDate);
