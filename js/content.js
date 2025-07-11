@@ -55,7 +55,7 @@ function fillForm(data) {
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
     findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
-    findAndFill(['first', 'first_name', 'fname','name', 'given-name'], data.firstName);
+    findAndFill(['first', 'first_name', 'fname', 'given-name'], data.firstName);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
     findAndFill(['sex', 'gender'], data.gender);
@@ -74,6 +74,7 @@ function fillForm(data) {
     findAndFill(['woreda', 'woreda_no', 'woreda_number'], data.woreda);
     findAndFill(['house', 'house_no', 'house_number'], data.houseNumber);
     findAndFill(['zip', 'postal_code', 'postcode'], data.zip);
+    findAndFill(['location', 'location_name', 'branch', 'branch_name'], data.location);
 
     findAndFill(['contract_type', 'contract'], data.contractType);
     findAndFill(['issue_date', 'date_of_issue', 'issued'], data.issueDate);

@@ -97,6 +97,7 @@ const regions = ["Addis Ababa", "Oromia", "Amhara", "Tigray", "SNNPR", "Afar", "
 const nationalities = ["Ethiopia"];
 const identityTypes = ["National ID", "Passport", "Driving License", "Residence ID", "Work Permit"];
 const streets = ["Bole Cameron Street", "Africa Avenue", "Churchill Road", "Megenagna", "Piazza", "Mexico Square", "Kazanchis", "CMC Road"];
+const locations = ["Temenja Yaje", "Atobis Tera", "Sefere Selam", "Total", "Ayer Tena", "Bole", "Kirkos", "Dill Gebeya", "Sarbet", "Mexico", "Arada", "Lideta", "Nifas Silk", "Tor Hayloch", "Saris", "Akaki", "Addisu Gebeya", "Asko", "Atana Tera", "Banbis", "Gergi", "Old Airport", "Haile Garment", "4 Killo", "6 Killo", "5 Killo", "Commerce", "Popolare", "Yohannes", "Gedam Sefer", "Mastawekiya", "Sebara Babur", "Brass", "Megenagna", "22 Golagol", "Hayahulet", "24 Sefer" ];
 
 const DummyData = {
     profiles: [
@@ -118,6 +119,7 @@ const DummyData = {
             woreda: "3",
             houseNumber: "B472",
             zip: "1000",
+            location: "Megenagna",
 
             contractType: "Full-time",
             issueDate: "2020-01-01",
@@ -148,9 +150,11 @@ for (let i = 0; i < 70; i++) {
     const nationality = randomFromArray(nationalities);
     const identityType = randomFromArray(identityTypes);
     const address = randomFromArray(streets);
+    const location = randomFromArray(locations);
     const woreda = (Math.floor(Math.random() * 10) + 1).toString();
     const houseNumber = randomString(1).toUpperCase() + Math.floor(100 + Math.random() * 900);
     const zip = (1000 + Math.floor(Math.random() * 9000)).toString();
+
     const birthDate = randomDate(new Date(1970, 0, 1), new Date(2005, 11, 31));
     const issueDate = randomDate(new Date(2015, 0, 1), new Date(2024, 11, 30));
     
@@ -176,6 +180,7 @@ for (let i = 0; i < 70; i++) {
         email,
         phone,
         address,
+        location,
         nationality,
         region,
         city,
