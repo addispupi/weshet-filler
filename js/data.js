@@ -46,50 +46,86 @@ const bankNames = [
     "Sidama Bank", "Siinqee Bank", "Tsehay Bank", "United Bank", "Wegagen Bank", "Zemen Bank", "ZamZam Bank"
 ];
 const firstNames = [
-    { name: "Akalu", gender: "Male" },
-    { name: "Abel", gender: "Male" },
-    { name: "Yasin", gender: "Male" },
-    { name: "Natnael", gender: "Male" },
-    { name: "Guta", gender: "Male" },
-    { name: "Kenenisa", gender: "Male" },
-    { name: "Haile", gender: "Male" },
-    { name: "Samuel", gender: "Male" },
-    { name: "Mohamed", gender: "Male" },
-    { name: "Abebe", gender: "Male" },
-    { name: "Kebede", gender: "Male" },
-    { name: "Abdela", gender: "Male" },
-    { name: "Yared", gender: "Male" },
-    { name: "Biruk", gender: "Male" },
-    { name: "Dawit", gender: "Male" },
-    { name: "Daniel", gender: "Male" },
-    { name: "Solomon", gender: "Male" },
-    { name: "Tibebe", gender: "Male" },
-    { name: "Shimeles", gender: "Male" },
-    { name: "Seyfe", gender: "Male" },
-    { name: "Mulu", gender: "Female" },
-    { name: "Mahlet", gender: "Female" },
-    { name: "Hana", gender: "Female" },
-    { name: "Liya", gender: "Female" },
-    { name: "Tigist", gender: "Female" },
-    { name: "Mekdes", gender: "Female" },
-    { name: "Selam", gender: "Female" },
-    { name: "Marta", gender: "Female" },
-    { name: "Bethlehem", gender: "Female" },
-    { name: "Ruth", gender: "Female" },
-    { name: "Fitsum", gender: "Female" },
-    { name: "Helen", gender: "Female" },
-    { name: "Tirunesh", gender: "Female" },
-    { name: "Meseret", gender: "Female" },
-    { name: "Kemila", gender: "Female" },
-    { name: "Nebiyat", gender: "Female" },
-    { name: "Nebiyat", gender: "Female" },
-    { name: "Saba", gender: "Female" },
-    { name: "Medina", gender: "Female" },
-    { name: "Kerima", gender: "Female" },
-    { name: "Fatuma", gender: "Female" },
+    { name: "Akalu", amh: "አካሉ", gender: "Male" },
+    { name: "Abel", amh: "አቤል", gender: "Male" },
+    { name: "Yasin", amh: "ያሲን", gender: "Male" },
+    { name: "Natnael", amh: "ናትናኤል", gender: "Male" },
+    { name: "Guta", amh: "ጉታ", gender: "Male" },
+    { name: "Kenenisa", amh: "ከነኒሳ", gender: "Male" },
+    { name: "Haile", amh: "ሃይሌ", gender: "Male" },
+    { name: "Samuel", amh: "ሳሙኤል", gender: "Male" },
+    { name: "Mohamed", amh: "ሞሐመድ", gender: "Male" },
+    { name: "Abebe", amh: "አበበ", gender: "Male" },
+    { name: "Kebede", amh: "ከበደ", gender: "Male" },
+    { name: "Abdela", amh: "አብደላ", gender: "Male" },
+    { name: "Yared", amh: "ያሬድ", gender: "Male" },
+    { name: "Biruk", amh: "ብሩክ", gender: "Male" },
+    { name: "Dawit", amh: "ዳዊት", gender: "Male" },
+    { name: "Daniel", amh: "ዳንኤል", gender: "Male" },
+    { name: "Solomon", amh: "ሰሎሞን", gender: "Male" },
+    { name: "Tibebe", amh: "ጥበበ", gender: "Male" },
+    { name: "Shimeles", amh: "ሽመለስ", gender: "Male" },
+    { name: "Seyfe", amh: "ሰይፈ", gender: "Male" },
+    { name: "Mulu", amh: "ሙሉ", gender: "Female" },
+    { name: "Mahlet", amh: "ማህሌት", gender: "Female" },
+    { name: "Hana", amh: "ሀና", gender: "Female" },
+    { name: "Liya", amh: "ሊያ", gender: "Female" },
+    { name: "Tigist", amh: "ትግስት", gender: "Female" },
+    { name: "Mekdes", amh: "መቅደስ", gender: "Female" },
+    { name: "Selam", amh: "ሰላም", gender: "Female" },
+    { name: "Marta", amh: "ማርታ", gender: "Female" },
+    { name: "Bethlehem", amh: "ቤተልሔም", gender: "Female" },
+    { name: "Ruth", amh: "ሩት", gender: "Female" },
+    { name: "Fitsum", amh: "ፍጹም", gender: "Female" },
+    { name: "Helen", amh: "ሄለን", gender: "Female" },
+    { name: "Tirunesh", amh: "ጥሩነሽ", gender: "Female" },
+    { name: "Meseret", amh: "መሰረት", gender: "Female" },
+    { name: "Kemila", amh: "ከሚላ", gender: "Female" },
+    { name: "Nebiyat", amh: "ነብያት", gender: "Female" },
+    { name: "Saba", amh: "ሳባ", gender: "Female" },
+    { name: "Medina", amh: "መዲና", gender: "Female" },
+    { name: "Kerima", amh: "ከሪማ", gender: "Female" },
+    { name: "Fatuma", amh: "ፋቱማ", gender: "Female" },
 ];
-const middleNames = ["Kebede", "Tasew", "Gebre", "Biniyam", "Hailemariam", "Habtemariam", "Taye", "Chala", "Caleb", "Tirusew", "Chane", "Alemu", "Bekele", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew"];
-const lastNames = ["Tasew", "Gebremariam", "Habtamu", "Weldeariam", "Gebre", "Alemu", "Bekele", "Ketema", "Tesfaye", "Demissie", "Wolde", "Mekonnen", "Ayalew", "Abate", "Tekletsadik", "Molla", "Yekuno" ];
+const middleNames = [
+    { name: "Kebede", amh: "ከበደ" },
+    { name: "Yabsira", amh: "ያብስራ" },
+    { name: "Gebre", amh: "ገብሬ" },
+    { name: "Biniyam", amh: "ቢንያም" },
+    { name: "Hailemariam", amh: "ኃይለማሪያም" },
+    { name: "Habtemariam", amh: "ሃብተማሪያም" },
+    { name: "Taye", amh: "ታዬ" },
+    { name: "Chala", amh: "ጫላ" },
+    { name: "Caleb", amh: "ካሌብ" },
+    { name: "Tirusew", amh: "ጥሩሰው" },
+    { name: "Chane", amh: "ቻኔ" },
+    { name: "Abrham", amh: "አብርሃም" },
+    { name: "Tariku", amh: "ታሪኩ" },
+    { name: "Simeneh", amh: "ስሜነህ" },
+    { name: "Addis", amh: "አዲሰ" },
+    { name: "Bereket", amh: "በረከት" },
+    { name: "Girma", amh: "ግርማ" },
+    { name: "Ayalew", amh: "አያሌው" }
+];
+const lastNames = [
+    { name: "Tasew", amh: "ጣሰው" },
+    { name: "Gebremariam", amh: "ገብረማሪያም" },
+    { name: "Habtamu", amh: "ሐብታሙ" },
+    { name: "Weldeariam", amh: "ወልደአሪያም" },
+    { name: "Takele", amh: "ታከለ" },
+    { name: "Alemu", amh: "አለሙ" },
+    { name: "Bekele", amh: "በቀለ" },
+    { name: "Ketema", amh: "ከተማ" },
+    { name: "Tesfaye", amh: "ተስፋዬ" },
+    { name: "Demissie", amh: "ደምሴ" },
+    { name: "Wolde", amh: "ወልዴ" },
+    { name: "Mekonnen", amh: "መኮንን" },
+    { name: "Ayalew", amh: "አያሌው" },
+    { name: "Abate", amh: "አባተ" },
+    { name: "Tekletsadik", amh: "ተክለጻዲቅ" },
+    { name: "Molla", amh: "ሞላ" },
+    { name: "Yekuno", amh: "ይኩኖ" }
+];
 
 const cities = ["Addis Ababa", "Adama", "Bahir Dar", "Hawassa", "Mekelle", "Dire Dawa"];
 const subCities = ["Bole", "Kirkos", "Yeka", "Arada", "Lideta", "Gullele", "Nifas Silk", "Kolfe"];
@@ -104,9 +140,13 @@ const DummyData = {
         {
             title: "Mr.",
             firstName: "Akalu",
+            firstNameAmh: "አካሉ",
             middleName: "Kebede",
+            middleNameAmh: "ከበደ",
             lastName: "Tasew",
+            lastNameAmh: "ጣሰው",
             fullName: "Akalu Kebede Tasew",
+            fullNameAmh: "አካሉ ከበደ ጣሰው",
             gender: "Male",
             birthDate: "1990-05-15", 
             email: "akalu.tasew@gmail.com",
@@ -139,9 +179,15 @@ for (let i = 0; i < 70; i++) {
     const gender = firstNameObj.gender;
     const title = randomFromArray(titlesByGender[gender]);
     const firstName = firstNameObj.name;
-    const middleName = randomFromArray(middleNames);
-    const lastName = randomFromArray(lastNames);
+    const firstNameAmh = firstNameObj.amh;
+    const middleNameObj = randomFromArray(middleNames);
+    const middleName = middleNameObj.name;
+    const middleNameAmh = middleNameObj.amh;
+    const lastNameObj = randomFromArray(lastNames);
+    const lastName = lastNameObj.name;
+    const lastNameAmh = lastNameObj.amh;
     const fullName = firstName + " " + middleName + " " + lastName;
+    const fullNameAmh = firstNameAmh + " " + middleNameAmh + " " + lastNameAmh;
     const contractType = randomFromArray(contractTypes);
     const bankName = randomFromArray(bankNames);
     const city = randomFromArray(cities);
@@ -172,9 +218,13 @@ for (let i = 0; i < 70; i++) {
     DummyData.profiles.push({
         title,
         firstName,
+        firstNameAmh,
         middleName,
+        middleNameAmh,
         lastName,
+        lastNameAmh,
         fullName,
+        fullNameAmh,
         gender,
         birthDate,
         email,
