@@ -54,16 +54,15 @@ function fillForm(data) {
 
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
-    findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
+    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
     findAndFill(['first', 'first_name', 'fname','name', 'given-name'], data.firstName);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
-
-    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
-
+    
+    findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
 
     // Multi-fill for fields like phone number
     findAndFill(['phone', 'mobile', 'cell', 'emergency_contact_number', 'phone_number'], null, true);
