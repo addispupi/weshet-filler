@@ -7,11 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.0] - 2025-07-12
+
+### Added
+-   **Amharic Language Support:** The extension can now intelligently find and populate form fields with corresponding Amharic names (first, middle, and last).
+-   **Enhanced Data Structure:** The internal data set has been updated to include Amharic equivalents for all names.
+-   **New Keywords:** Added detection for Amharic-specific input field `names` and `IDs`
+
+---
+
 ## [0.1.0.beta.2] - 2025-07-10
 
+### Added
+-   Functionality to populate multiple phone number fields on a page sequentially.
+-   Expanded the list of Ethiopian first names and last names for more variety.
+-   Added `Driving License`, `Residence ID`, and `Work Permit` to identity types.
+
 ### Fixed
-- Improved randomization logic to prevent repetitive data on subsequent fills.
-- Correctly populate multiple phone number fields when available.
+-   Improved randomization logic to ensure different data is used on subsequent fills within the same session.
+-   Corrected an issue where a single phone number from the data could be used to fill all phone fields.
 
 ##  [0.1.0] - 2025-07-09
 ### 🧱 Initial Release
