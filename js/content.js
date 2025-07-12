@@ -56,8 +56,12 @@ function fillForm(data) {
     findAndFill(['title'], data.title);
     findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
     findAndFill(['first', 'first_name', 'fname', 'given-name'], data.firstName);
+    findAndFill(['first_name_amharic', 'first_amh', 'fname_amh', 'given_name_amh'], data.firstNameAmh);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
+    findAndFill(['middle_name_amharic', 'middle_amh', 'm_name_amh', 'mname_amh'], data.middleNameAmh);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
+    findAndFill(['last_name_amharic', 'last_amh', 'lname_amh', 'surname_amh', 'family_name_amh'], data.lastNameAmh);
+    findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh'], data.fullNameAmh);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
