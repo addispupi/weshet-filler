@@ -1,3 +1,47 @@
+// Generic search/fill terms 
+if (!window.weshetFillerSearchTerms) {
+    window.weshetFillerSearchTerms = [
+        "test",
+        "example",
+        "sample",
+        "find user",
+        "lookup order",
+        "search123",
+        "query data",
+        "fill form",
+        "demo",
+        "random keyword",
+        "customer info",
+        "order id",
+        "address lookup",
+        "user profile",
+        "reference number",
+        "employee",
+        "employee name",
+        "employee number",
+        "employee code",
+        "employee details",
+        "employee information",
+        "employee record",
+        "payroll",
+        "finance",
+        "crm",
+        "supply chain",
+        "hr",
+        "it",
+        "marketing",
+        "sales"
+    ];
+}
+if (!window.weshetFillerRandomSearchTerm) {
+    window.weshetFillerRandomSearchTerm = function() {
+        var arr = window.weshetFillerSearchTerms;
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+}
+var searchTerms = window.weshetFillerSearchTerms;
+var randomSearchTerm = window.weshetFillerRandomSearchTerm;
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Wait for a message from the popup script
     if(message.type == "FILL_FORM") {
@@ -119,4 +163,13 @@ function fillForm(data) {
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
     findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
+
+    // marital status
+    findAndFill(['marital_status', 'marital_status_id', 'marital_status_name'], data.maritalStatus);
+
+    // Generic search/fill/query/keyword fields
+    findAndFill(['search', 'fill', 'query', 'keyword'], randomSearchTerm());
+
+    findAndFill(['language', 'language_id', 'language_name', 'lang'], data.language);
+    
 }

@@ -1,6 +1,4 @@
-// Runs in the popup window of the browser extension
-
-// import dummy data from the data.js file
+// import dummy data
 import {DummyData} from './data.js';
 
 // Get the button element from the popup HTML
