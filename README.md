@@ -15,13 +15,10 @@
   <a href="https://github.com/your-username/weshet-filler/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   </a>
-  <a href="#">
-    <img src="https://img.shields.io/badge/Version-v0.1--beta-orange.svg" alt="Version">
+  <a href="[https://chromewebstore.google.com/detail/ginjmkibemijiejmbpiloljmhgflpeln?utm_source=item-share-cb]">
+    <img src="https://img.shields.io/chrome-web-store/v/ginjmkibemijiejmbpiloljmhgflpeln?label=chrome%20web%20store&color=green" alt="Chrome Web Store">
   </a>
-  <a href="[YOUR_CHROME_STORE_LINK_HERE]">
-    <img src="https://img.shields.io/chrome-web-store/v/your-extension-id?label=chrome%20web%20store&color=green" alt="Chrome Web Store">
-  </a>
-
+  
   [![GitHub stars](https://img.shields.io/github/stars/addispupi/weshet-filler)](https://github.com/addispupi/weshet-filler/stargazers)
 
 </div>
