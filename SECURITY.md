@@ -8,7 +8,7 @@ We are committed to providing security updates for the latest major version avai
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
+| 0.2.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
