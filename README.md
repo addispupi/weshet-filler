@@ -35,7 +35,7 @@
 ## Installation
 
 1. **From the Chrome Web Store `Recommended`**
-Once published, you can easily install Weshet Filler from the official Chrome Web Store.
+    - https://chromewebstore.google.com/detail/ginjmkibemijiejmbpiloljmhgflpeln?utm_source=item-share-cb
 2. **For Developers & Contributors  `Manual Installation`**
 If you want to contribute or test the latest unreleased version:
     - **Clone the repository:**

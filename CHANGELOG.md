@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.1] - 2025-07-15
+### Added
+-   **Generic Search/Fill/Query Field Support:** The extension now detects and fills generic fields such as "search", "fill", "query", and "keyword" with random, realistic search terms.
+-   **Improved Select Field Handling:** Enhanced logic for `<select>` elements to better handle numeric and non-numeric options, ensuring more accurate and varied data selection.
+-   **Expanded Keyword Detection:** Broader keyword matching for address, phone, and other fields to improve compatibility with diverse form structures.
+-   **New Data Sets:** Language, Marital Status
+
+### Changed
+-   **Refined Phone Number Autofill:** Phone number fields are now filled with randomly generated Ethiopian numbers when no data is provided, supporting multiple phone fields per form.
+-   **More Robust Event Dispatching:** Input and change events are now reliably dispatched after autofill to ensure compatibility with dynamic forms and frameworks.
+
+### Fixed
+-   **Edge Case Handling for Hidden/Disabled Fields:** The extension now skips hidden or already-filled fields, reducing the risk of overwriting user data or triggering validation errors.
+-   **Improved Option Selection in Selects:** Fixed an issue where some select fields were not being filled if the provided value did not match available options.
+
+---
+
+
 ## [0.2.0] - 2025-07-12
 
 ### Added
