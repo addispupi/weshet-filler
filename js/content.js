@@ -34,13 +34,44 @@ function fillForm(data) {
                         if (multiFill && value === null && ['phone','mobile','cell','emergency_contact_number','phone_number'].includes(keyword)) {
                             fillValue = randomPhone();
                         }
-                        input.value = fillValue;
-                        input.dispatchEvent(new Event('input', { bubbles: true }));
-                        input.dispatchEvent(new Event('change', { bubbles: true }));
-                        // console.log(`Filled ${input.name || input.id || 'input'} with value: ${value}`);
-                        filledCount++;
-                        if (!multiFill) return; // stop if not multi-fill
-                        break;
+                        // Logic for <select> elements
+                        if (input.tagName.toLowerCase() === 'select') {
+                            let optionToSelect = null;
+                            const options = Array.from(input.options).filter(opt => !opt.disabled && opt.value !== '');
+                            if (fillValue == null || !options.some(opt => opt.value == fillValue)) {
+                                // Try to pick a random option
+                                if (options.length > 0) {
+                                    // Check if all options are numbers
+                                    const allNumeric = options.every(opt => /^\d+$/.test(opt.value));
+                                    if (allNumeric) {
+                                        // Pick a random numeric option
+                                        const randomIdx = Math.floor(Math.random() * options.length);
+                                        optionToSelect = options[randomIdx].value;
+                                    } else {
+                                        // Pick any random option
+                                        const randomIdx = Math.floor(Math.random() * options.length);
+                                        optionToSelect = options[randomIdx].value;
+                                    }
+                                }
+                            } else {
+                                optionToSelect = fillValue;
+                            }
+                            if (optionToSelect !== null) {
+                                input.value = optionToSelect;
+                                input.dispatchEvent(new Event('input', { bubbles: true }));
+                                input.dispatchEvent(new Event('change', { bubbles: true }));
+                                filledCount++;
+                                if (!multiFill) return;
+                                break;
+                            }
+                        } else {
+                            input.value = fillValue;
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                            input.dispatchEvent(new Event('change', { bubbles: true }));
+                            filledCount++;
+                            if (!multiFill) return; // stop if not multi-fill
+                            break;
+                        }
                     }
                 }
             }
