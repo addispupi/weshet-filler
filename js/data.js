@@ -45,6 +45,9 @@ const bankNames = [
     "Lion International Bank", "Nib International Bank", "Omo Bank", "Oromia International Bank", "Rammis Bank",
     "Sidama Bank", "Siinqee Bank", "Tsehay Bank", "United Bank", "Wegagen Bank", "Zemen Bank", "ZamZam Bank"
 ];
+
+const maritalStatuses = ["Single", "Married", "Divorced", "Widowed", "Separated"];
+
 const firstNames = [
     { name: "Akalu", amh: "አካሉ", gender: "Male" },
     { name: "Abel", amh: "አቤል", gender: "Male" },
@@ -130,10 +133,15 @@ const lastNames = [
 const cities = ["Addis Ababa", "Adama", "Bahir Dar", "Hawassa", "Mekelle", "Dire Dawa"];
 const subCities = ["Bole", "Kirkos", "Yeka", "Arada", "Lideta", "Gullele", "Nifas Silk", "Kolfe"];
 const regions = ["Addis Ababa", "Oromia", "Amhara", "Tigray", "SNNPR", "Afar", "Somali", "Benishangul-Gumuz", "Gambela", "Harari", "Sidama"];
-const nationalities = ["Ethiopia"];
+const nationalities = [ "Ethiopia", "Eritrea", "Somalia", "Sudan", "Kenya", "Tanzania", "Uganda", "Rwanda", "Burundi", "South Sudan",
+                        "Congo", "Zambia", "Zimbabwe", "Mozambique", "Angola", "Namibia", "Botswana", "Lesotho", "Swaziland", "Malawi",
+                        "Madagascar", "Mauritius", "Reunion", "Mauritania", "Cape Verde", "Sao Tome and Principe", "Equatorial Guinea",
+                        "Gabon", "Congo Brazzaville", "Congo Kinshasa", "Togo", "Benin", "Cameroon", "Chad", "Central African Republic",
+                        "Nigeria"];
 const identityTypes = ["National ID", "Passport", "Driving License", "Residence ID", "Work Permit"];
 const streets = ["Bole Cameron Street", "Africa Avenue", "Churchill Road", "Megenagna", "Piazza", "Mexico Square", "Kazanchis", "CMC Road"];
 const locations = ["Temenja Yaje", "Atobis Tera", "Sefere Selam", "Total", "Ayer Tena", "Bole", "Kirkos", "Dill Gebeya", "Sarbet", "Mexico", "Arada", "Lideta", "Nifas Silk", "Tor Hayloch", "Saris", "Akaki", "Addisu Gebeya", "Asko", "Atana Tera", "Banbis", "Gergi", "Old Airport", "Haile Garment", "4 Killo", "6 Killo", "5 Killo", "Commerce", "Popolare", "Yohannes", "Gedam Sefer", "Mastawekiya", "Sebara Babur", "Brass", "Megenagna", "22 Golagol", "Hayahulet", "24 Sefer" ];
+const languages = ["Amharic", "English", "French", "Arabic", "Afaan Oromoo", "Somali", "Tigrinya", "Qafar af"];
 
 const DummyData = {
     profiles: [
@@ -157,9 +165,11 @@ const DummyData = {
             city: "Addis Ababa",
             subCity: "Bole",
             woreda: "3",
+            location: "Megenagna",
             houseNumber: "B472",
             zip: "1000",
-            location: "Megenagna",
+
+            maritalStatus: "Single",
 
             contractType: "Full-time",
             issueDate: "2020-01-01",
@@ -169,6 +179,8 @@ const DummyData = {
             identityNumber: "1234567890123564",
             bankName: "Commercial Bank of Ethiopia",
             bankAccountNumber: "1234567890123456",
+
+            language: "Amharic",
         },
     ]
 };
@@ -196,14 +208,15 @@ for (let i = 0; i < 70; i++) {
     const nationality = randomFromArray(nationalities);
     const identityType = randomFromArray(identityTypes);
     const address = randomFromArray(streets);
-    const location = randomFromArray(locations);
     const woreda = (Math.floor(Math.random() * 10) + 1).toString();
     const houseNumber = randomString(1).toUpperCase() + Math.floor(100 + Math.random() * 900);
+    const location = randomFromArray(locations);
     const zip = (1000 + Math.floor(Math.random() * 9000)).toString();
+
+    const maritalStatus = randomFromArray(maritalStatuses);
 
     const birthDate = randomDate(new Date(1970, 0, 1), new Date(2005, 11, 31));
     const issueDate = randomDate(new Date(2015, 0, 1), new Date(2024, 11, 30));
-    
     // Generate expiry date between 1 and 6 years from the issue date
     const now = new Date();
     const expiryStart = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
@@ -214,6 +227,8 @@ for (let i = 0; i < 70; i++) {
     const phone = randomPhone();
     const identityNumber = randomNumberString(16);
     const bankAccountNumber = randomNumberString(10);
+
+    const language = randomFromArray(languages);
 
     DummyData.profiles.push({
         title,
@@ -230,14 +245,15 @@ for (let i = 0; i < 70; i++) {
         email,
         phone,
         address,
-        location,
         nationality,
         region,
         city,
         subCity,
         woreda,
         houseNumber,
+        location,
         zip,
+        maritalStatus,
         contractType,
         issueDate,
         expiryDate,
@@ -245,8 +261,8 @@ for (let i = 0; i < 70; i++) {
         identityNumber,
         bankName,
         bankAccountNumber,
+        language,
     });
 }
-
 
 export { DummyData };
