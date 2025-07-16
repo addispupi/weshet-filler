@@ -97,6 +97,27 @@ function randomAmharicParagraph() {
     return paragraph.trim();
 }
 
+function randomSubject() {
+    const subjects = [
+        "Request for Information",
+        "Application Submission",
+        "Feedback on Service",
+        "General Inquiry",
+        "Account Update",
+        "Support Needed",
+        "Form Submission",
+        "New Registration",
+        "Profile Update",
+        "Service Request",
+        "Document Upload",
+        "Contact Us",
+        "Quick Question",
+        "Follow-up Needed",
+        "Important Notice"
+    ];
+    return subjects[Math.floor(Math.random() * subjects.length)];
+}
+
 function fillForm(data) {
     const findAndFill = (keywords, value, multiFill = false) => {
         const allInputs = document.querySelectorAll('input, textarea, select, tags');
@@ -151,6 +172,10 @@ function fillForm(data) {
                                 break;
                             }
                         } else {
+                            // Skip if the input type is 'date'
+                            if (input.type && input.type.toLowerCase() === 'date') {
+                                break;
+                            }
                             input.value = fillValue;
                             input.dispatchEvent(new Event('input', { bubbles: true }));
                             input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -171,14 +196,14 @@ function fillForm(data) {
 
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
-    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
-    findAndFill(['first', 'first_name', 'fname', 'given-name'], data.firstName);
+    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName' ], data.fullName);
+    findAndFill(['first', 'first_name', 'fname', 'given-name', 'sendName', 'send_name', 'YourName', 'your_name', 'yourName'], data.firstName);
     findAndFill(['first_name_amharic', 'first_amh', 'fname_amh', 'given_name_amh'], data.firstNameAmh);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
     findAndFill(['middle_name_amharic', 'middle_amh', 'm_name_amh', 'mname_amh'], data.middleNameAmh);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
     findAndFill(['last_name_amharic', 'last_amh', 'lname_amh', 'surname_amh', 'family_name_amh'], data.lastNameAmh);
-    findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh'], data.fullNameAmh);
+    findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh', 'sendName_amh', 'sendNameAmh', 'your_name_amharic', 'sendNameAmharic', 'yourNameAmh'], data.fullNameAmh);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
@@ -230,4 +255,7 @@ function fillForm(data) {
             textarea.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
+
+    // Subject message filler
+    findAndFill(['subject', 'subject_message', 'sendMessage', 'send_message'], randomSubject());
 }
