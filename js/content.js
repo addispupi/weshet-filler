@@ -55,6 +55,48 @@ function randomPhone() {
     return prefix + Math.floor(10000000 + Math.random() * 90000000);
 }
 
+function randomParagraph() {
+    const sentences = [
+        "This is a sample description for testing purposes.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Please review the provided information carefully.",
+        "This field is filled automatically by Weshet Filler.",
+        "The quick brown fox jumps over the lazy dog.",
+        "Contact us for more details regarding this entry.",
+        "This is a randomly generated message for demonstration.",
+        "Thank you for using the form filler extension.",
+        "All data entered here is for sample purposes only.",
+        "Feel free to edit this message as needed."
+    ];
+    let paragraph = '';
+    const numSentences = 2 + Math.floor(Math.random() * 2); // 2-3 sentences
+    for (let i = 0; i < numSentences; i++) {
+        paragraph += sentences[Math.floor(Math.random() * sentences.length)] + ' ';
+    }
+    return paragraph.trim();
+}
+
+function randomAmharicParagraph() {
+    const sentences = [
+        "ይህ ለሙከራ የተዘጋጀ መግለጫ ነው።",
+        "ሎሬም ኢፕሰም ዶሎር ሲት አሜት።",
+        "እባክዎ የቀረበውን መረጃ በጥንቃቄ ይመልከቱ።",
+        "ይህ ቦታ በውሸት መሙሊያ በራስ-ሰር ተሞልቷል።",
+        "ፈጣኑ እና የመጀመሪያው ቡና አቦል ሲሆን የሚቀጥለው በረካ ከዛም መጨረሻው በረካ ይባላል።",
+        "ለበለጠ መረጃ እባክዎን ያግኙን።",
+        "ይህ መልእክት ለማሳያ የተፈጠረ ነው።",
+        "በዚህ ቅጽ ላይ የተሞሉት መረጃዎች ለምሳሌ ብቻ ናቸው።",
+        "እባክዎ ይህን መልእክት እንደ ፈለጉት ይለውጡት።",
+        "ስለ ራስዎ የተሞሉትን መረጃዎች ያስተካክሉ።"
+    ];
+    let paragraph = '';
+    const numSentences = 2 + Math.floor(Math.random() * 2); // 2-3 sentences
+    for (let i = 0; i < numSentences; i++) {
+        paragraph += sentences[Math.floor(Math.random() * sentences.length)] + ' ';
+    }
+    return paragraph.trim();
+}
+
 function fillForm(data) {
     const findAndFill = (keywords, value, multiFill = false) => {
         const allInputs = document.querySelectorAll('input, textarea, select, tags');
@@ -162,14 +204,30 @@ function fillForm(data) {
     findAndFill(['identity_type', 'id_type', 'identity', 'identity_type_id'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
-    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
+    findAndFill(['bank_account', 'account_number', 'account_name', 'bank'], data.bankAccountNumber);
 
     // marital status
     findAndFill(['marital_status', 'marital_status_id', 'marital_status_name'], data.maritalStatus);
 
     // Generic search/fill/query/keyword fields
-    findAndFill(['search', 'fill', 'query', 'keyword'], randomSearchTerm());
+    findAndFill(['search', 'fill', 'query', 'keyword', 'navbar-search'], randomSearchTerm());
 
     findAndFill(['language', 'language_id', 'language_name', 'lang'], data.language);
     
+    // fill any empty <textarea> fields with a random paragraph
+    const allTextareas = document.querySelectorAll('textarea');
+    for (const textarea of allTextareas) {
+        if (textarea.offsetParent !== null && textarea.value === '') {
+            const name = (textarea.name || '').toLowerCase();
+            const id = (textarea.id || '').toLowerCase();
+            const placeholder = (textarea.placeholder || '').toLowerCase();
+            if (name.includes('amh') || name.includes('amharic') || id.includes('amh') || id.includes('amharic') || placeholder.includes('amh') || placeholder.includes('amharic')) {
+                textarea.value = randomAmharicParagraph();
+            } else {
+                textarea.value = randomParagraph();
+            }
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            textarea.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
 }
