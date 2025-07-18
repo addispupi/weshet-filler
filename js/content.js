@@ -196,7 +196,7 @@ function fillForm(data) {
 
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
-    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName' ], data.fullName);
+    findAndFill(['emergency_contact_name', 'name', 'full_name', 'full name', 'fullName', 'bookingDipositBy', 'diposit by', 'diposit_by', 'paid_by', 'paidBy' ], data.fullName);
     findAndFill(['first', 'first_name', 'fname', 'given-name', 'sendName', 'send_name', 'YourName', 'your_name', 'yourName'], data.firstName);
     findAndFill(['first_name_amharic', 'first_amh', 'fname_amh', 'given_name_amh'], data.firstNameAmh);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
@@ -206,8 +206,12 @@ function fillForm(data) {
     findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh', 'sendName_amh', 'sendNameAmh', 'your_name_amharic', 'sendNameAmharic', 'yourNameAmh'], data.fullNameAmh);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
-    findAndFill(['email', 'e_mail', 'mail'], data.email);
+
+    // Fill date fields with a random dates
+    findAndFill(['date', 'registration_date', 'payment_date', 'start_date', 'schedule_start_date'], data.reserveStartDate);
+    findAndFill(['reserve_end_date', 'end_date', 'end_date_of_reserve'], data.reserveEndDate);
     
+    findAndFill(['email', 'e_mail', 'mail'], data.email);
     findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
 
     // Multi-fill for fields like phone number
@@ -230,6 +234,7 @@ function fillForm(data) {
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
     findAndFill(['bank_account', 'account_number', 'account_name', 'bank'], data.bankAccountNumber);
+    findAndFill(['transaction_number', 'transaction_id', 'transaction_no', 'transaction_code', 'transaction number'], data.transactionNumber);
 
     // marital status
     findAndFill(['marital_status', 'marital_status_id', 'marital_status_name'], data.maritalStatus);

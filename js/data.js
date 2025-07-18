@@ -215,10 +215,14 @@ for (let i = 0; i < 70; i++) {
 
     const maritalStatus = randomFromArray(maritalStatuses);
 
-    const birthDate = randomDate(new Date(1970, 0, 1), new Date(2005, 11, 31));
-    const issueDate = randomDate(new Date(2015, 0, 1), new Date(2024, 11, 30));
     // Generate expiry date between 1 and 6 years from the issue date
     const now = new Date();
+    const birthDate = randomDate(new Date(1970, 0, 1), new Date(2005, 11, 31));
+    const issueDate = randomDate(new Date(2015, 0, 1), now);
+
+    const reserveStartDate = randomDate(new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000), now);
+    const reserveEndDate = randomDate(now, new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000));
+
     const expiryStart = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
     const expiryEnd = new Date(now.getFullYear() + 6, now.getMonth(), now.getDate());
     const expiryDate = randomDate(expiryStart, expiryEnd);
@@ -228,6 +232,10 @@ for (let i = 0; i < 70; i++) {
     const identityNumber = randomNumberString(16);
     const bankAccountNumber = randomNumberString(10);
 
+    // generate a random transaction number with format(FT243461T7PG)
+    // start with(FT) get last 2 digits of the year(25) and random numbers and letters (3461T7PG)
+    const transactionNumber = `FT${now.getFullYear() % 100}${randomNumberString(4)}${randomString(3)}`;
+    
     const language = randomFromArray(languages);
 
     DummyData.profiles.push({
@@ -262,6 +270,9 @@ for (let i = 0; i < 70; i++) {
         bankName,
         bankAccountNumber,
         language,
+        reserveStartDate,
+        reserveEndDate,
+        transactionNumber,
     });
 }
 
