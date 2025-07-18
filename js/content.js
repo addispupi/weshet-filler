@@ -55,6 +55,69 @@ function randomPhone() {
     return prefix + Math.floor(10000000 + Math.random() * 90000000);
 }
 
+function randomParagraph() {
+    const sentences = [
+        "This is a sample description for testing purposes.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Please review the provided information carefully.",
+        "This field is filled automatically by Weshet Filler.",
+        "The quick brown fox jumps over the lazy dog.",
+        "Contact us for more details regarding this entry.",
+        "This is a randomly generated message for demonstration.",
+        "Thank you for using the form filler extension.",
+        "All data entered here is for sample purposes only.",
+        "Feel free to edit this message as needed."
+    ];
+    let paragraph = '';
+    const numSentences = 2 + Math.floor(Math.random() * 2); // 2-3 sentences
+    for (let i = 0; i < numSentences; i++) {
+        paragraph += sentences[Math.floor(Math.random() * sentences.length)] + ' ';
+    }
+    return paragraph.trim();
+}
+
+function randomAmharicParagraph() {
+    const sentences = [
+        "ይህ ለሙከራ የተዘጋጀ መግለጫ ነው።",
+        "ሎሬም ኢፕሰም ዶሎር ሲት አሜት።",
+        "እባክዎ የቀረበውን መረጃ በጥንቃቄ ይመልከቱ።",
+        "ይህ ቦታ በውሸት መሙሊያ በራስ-ሰር ተሞልቷል።",
+        "ፈጣኑ እና የመጀመሪያው ቡና አቦል ሲሆን የሚቀጥለው በረካ ከዛም መጨረሻው በረካ ይባላል።",
+        "ለበለጠ መረጃ እባክዎን ያግኙን።",
+        "ይህ መልእክት ለማሳያ የተፈጠረ ነው።",
+        "በዚህ ቅጽ ላይ የተሞሉት መረጃዎች ለምሳሌ ብቻ ናቸው።",
+        "እባክዎ ይህን መልእክት እንደ ፈለጉት ይለውጡት።",
+        "ስለ ራስዎ የተሞሉትን መረጃዎች ያስተካክሉ።"
+    ];
+    let paragraph = '';
+    const numSentences = 2 + Math.floor(Math.random() * 2); // 2-3 sentences
+    for (let i = 0; i < numSentences; i++) {
+        paragraph += sentences[Math.floor(Math.random() * sentences.length)] + ' ';
+    }
+    return paragraph.trim();
+}
+
+function randomSubject() {
+    const subjects = [
+        "Request for Information",
+        "Application Submission",
+        "Feedback on Service",
+        "General Inquiry",
+        "Account Update",
+        "Support Needed",
+        "Form Submission",
+        "New Registration",
+        "Profile Update",
+        "Service Request",
+        "Document Upload",
+        "Contact Us",
+        "Quick Question",
+        "Follow-up Needed",
+        "Important Notice"
+    ];
+    return subjects[Math.floor(Math.random() * subjects.length)];
+}
+
 function fillForm(data) {
     const findAndFill = (keywords, value, multiFill = false) => {
         const allInputs = document.querySelectorAll('input, textarea, select, tags');
@@ -109,6 +172,10 @@ function fillForm(data) {
                                 break;
                             }
                         } else {
+                            // Skip if the input type is 'date'
+                            if (input.type && input.type.toLowerCase() === 'date') {
+                                break;
+                            }
                             input.value = fillValue;
                             input.dispatchEvent(new Event('input', { bubbles: true }));
                             input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -129,14 +196,14 @@ function fillForm(data) {
 
     // Mapping of data fields to keywords
     findAndFill(['title'], data.title);
-    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName'], data.fullName);
-    findAndFill(['first', 'first_name', 'fname', 'given-name'], data.firstName);
+    findAndFill(['emergency_contact_name', 'full_name', 'full name', 'fullName' ], data.fullName);
+    findAndFill(['first', 'first_name', 'fname', 'given-name', 'sendName', 'send_name', 'YourName', 'your_name', 'yourName'], data.firstName);
     findAndFill(['first_name_amharic', 'first_amh', 'fname_amh', 'given_name_amh'], data.firstNameAmh);
     findAndFill(['middle', 'middle_name', 'm_name', 'mname'], data.middleName);
     findAndFill(['middle_name_amharic', 'middle_amh', 'm_name_amh', 'mname_amh'], data.middleNameAmh);
     findAndFill(['last', 'last_name', 'lname', 'surname', 'family-name'], data.lastName);
     findAndFill(['last_name_amharic', 'last_amh', 'lname_amh', 'surname_amh', 'family_name_amh'], data.lastNameAmh);
-    findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh'], data.fullNameAmh);
+    findAndFill(['full_name_amharic', 'full_amh', 'fullname_amh', 'sendName_amh', 'sendNameAmh', 'your_name_amharic', 'sendNameAmharic', 'yourNameAmh'], data.fullNameAmh);
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
@@ -162,14 +229,33 @@ function fillForm(data) {
     findAndFill(['identity_type', 'id_type', 'identity', 'identity_type_id'], data.identityType);
     findAndFill(['identity_number', 'id_number'], data.identityNumber);
     findAndFill(['bank_name', 'bank'], data.bankName);
-    findAndFill(['bank_account', 'account_number'], data.bankAccountNumber);
+    findAndFill(['bank_account', 'account_number', 'account_name', 'bank'], data.bankAccountNumber);
 
     // marital status
     findAndFill(['marital_status', 'marital_status_id', 'marital_status_name'], data.maritalStatus);
 
     // Generic search/fill/query/keyword fields
-    findAndFill(['search', 'fill', 'query', 'keyword'], randomSearchTerm());
+    findAndFill(['search', 'fill', 'query', 'keyword', 'navbar-search'], randomSearchTerm());
 
     findAndFill(['language', 'language_id', 'language_name', 'lang'], data.language);
     
+    // fill any empty <textarea> fields with a random paragraph
+    const allTextareas = document.querySelectorAll('textarea');
+    for (const textarea of allTextareas) {
+        if (textarea.offsetParent !== null && textarea.value === '') {
+            const name = (textarea.name || '').toLowerCase();
+            const id = (textarea.id || '').toLowerCase();
+            const placeholder = (textarea.placeholder || '').toLowerCase();
+            if (name.includes('amh') || name.includes('amharic') || id.includes('amh') || id.includes('amharic') || placeholder.includes('amh') || placeholder.includes('amharic')) {
+                textarea.value = randomAmharicParagraph();
+            } else {
+                textarea.value = randomParagraph();
+            }
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            textarea.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
+    // Subject message filler
+    findAndFill(['subject', 'subject_message', 'sendMessage', 'send_message'], randomSubject());
 }
