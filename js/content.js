@@ -160,6 +160,74 @@ function randomSubject() {
     return subjects[Math.floor(Math.random() * subjects.length)];
 }
 
+const websiteFieldKeywords = ['website', 'site_url', 'web_url', 'homepage', 'company_website', 'domain', 'url'];
+
+function matchesWebsiteKeywords(input) {
+    const name = (input.name || '').toLowerCase();
+    const id = (input.id || '').toLowerCase();
+    const placeholder = (input.placeholder || '').toLowerCase();
+    const ariaLabel = (input.getAttribute('aria-label') || '').toLowerCase();
+    return websiteFieldKeywords.some(
+        (kw) =>
+            name.includes(kw) ||
+            id.includes(kw) ||
+            placeholder.includes(kw) ||
+            ariaLabel.includes(kw)
+    );
+}
+
+/** Fills every visible website/url field in document order, using the next URL from the profile pool each time. */
+function fillWebsiteFieldsSequential(data) {
+    const pool =
+        Array.isArray(data.websites) && data.websites.length > 0
+            ? data.websites
+            : data.website
+              ? [data.website]
+              : ['https://example.com'];
+    let idx = 0;
+    const nextUrl = () => pool[idx++ % pool.length];
+
+    const skipInputTypes = new Set([
+        'button',
+        'submit',
+        'reset',
+        'checkbox',
+        'radio',
+        'file',
+        'hidden',
+        'password',
+        'date',
+    ]);
+    const allInputs = document.querySelectorAll('input, textarea, select, tags');
+    for (const input of allInputs) {
+        if (input.offsetParent === null || input.value !== '') continue;
+        const tag = input.tagName.toLowerCase();
+        if (tag === 'select') continue;
+        if (tag === 'textarea') {
+            if (!matchesWebsiteKeywords(input)) continue;
+            input.value = nextUrl();
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            continue;
+        }
+        if (tag === 'tags' && 'value' in input) {
+            if (!matchesWebsiteKeywords(input)) continue;
+            input.value = nextUrl();
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            continue;
+        }
+        if (tag !== 'input') continue;
+        const t = (input.type || '').toLowerCase();
+        if (skipInputTypes.has(t)) continue;
+        const isUrlType = t === 'url';
+        if (!isUrlType && !matchesWebsiteKeywords(input)) continue;
+        input.value = nextUrl();
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
+
 function fillForm(data) {
     const findAndFill = (keywords, value, multiFill = false) => {
         const allInputs = document.querySelectorAll('input, textarea, select, tags');
@@ -265,18 +333,7 @@ function fillForm(data) {
         }
     }
 
-    findAndFill(
-        ['website', 'site_url', 'web_url', 'homepage', 'company_website', 'domain', 'url'],
-        data.website
-    );
-    const urlInputs = document.querySelectorAll('input[type="url"]');
-    for (const input of urlInputs) {
-        if (input.offsetParent !== null && input.value === '') {
-            input.value = data.website;
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-    }
+    fillWebsiteFieldsSequential(data);
 
     findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
 
