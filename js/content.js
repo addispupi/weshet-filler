@@ -1,3 +1,8 @@
+(function () {
+    'use strict';
+    if (window.__weshetFillerContentInit) return;
+    window.__weshetFillerContentInit = true;
+
 // Generic search/fill terms 
 if (!window.weshetFillerSearchTerms) {
     window.weshetFillerSearchTerms = [
@@ -386,3 +391,5 @@ function fillForm(data) {
     // Subject message filler
     findAndFill(['subject', 'subject_message', 'sendMessage', 'send_message'], randomSubject());
 }
+
+})();
