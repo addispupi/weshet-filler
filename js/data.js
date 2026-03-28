@@ -32,6 +32,21 @@ function randomNumberString(length) {
     return result;
 }
 
+function randomPassword(length = 14) {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+function randomWebsite(firstName, lastName) {
+    const sub = `${firstName}${lastName}`.toLowerCase().replace(/[^a-z0-9]/g, '') || randomString(8).toLowerCase();
+    const hosts = ['example.com', 'example.org', 'testsite.dev', 'sample.io'];
+    return `https://${sub}.${randomFromArray(hosts)}`;
+}
+
 const titlesByGender = {
     Male: ["Mr.", "Dr.", "Prof.", "PhD.", "Sir."],
     Female: ["Ms.", "Mrs.", "Dr.", "Prof.", "PhD.", "Miss.", "Madam"]
@@ -158,6 +173,8 @@ const DummyData = {
             gender: "Male",
             birthDate: "1990-05-15", 
             email: "akalu.tasew@gmail.com",
+            password: "WeshetTest#2024",
+            website: "https://example.com",
             phone: "+251 911 234 567",
             address: "Bole Cameron Street",
             nationality: "Ethiopia",
@@ -224,6 +241,8 @@ for (let i = 0; i < 70; i++) {
     const expiryDate = randomDate(expiryStart, expiryEnd);
 
     const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@example.com`;
+    const password = randomPassword();
+    const website = randomWebsite(firstName, lastName);
     const phone = randomPhone();
     const identityNumber = randomNumberString(16);
     const bankAccountNumber = randomNumberString(10);
@@ -243,6 +262,8 @@ for (let i = 0; i < 70; i++) {
         gender,
         birthDate,
         email,
+        password,
+        website,
         phone,
         address,
         nationality,
