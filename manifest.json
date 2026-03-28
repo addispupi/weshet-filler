@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Weshet Filler",
-  "version": "0.2.1",
-  "version_name": "0.2.1",
+  "version": "0.2.2",
+  "version_name": "0.2.2",
   "description": "Fill online forms with Ethiopia-specific data for testing and development.",
   "permissions": [
     "activeTab",

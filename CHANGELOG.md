@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.2] - 2026-03-28
+
+### Added
+-   **Clear form:** A **Reset** control next to **Fill** in the popup clears filled data on the active tab—visible text-like inputs, textareas, and `tags` fields are emptied; `<select>` elements are reset to an empty option when available, otherwise to the first enabled option. `input` and `change` events are dispatched so client-side validation and frameworks stay in sync.
+
+---
+
 ## [0.2.1] - 2025-07-15
 ### Added
 -   **Generic Search/Fill/Query Field Support:** The extension now detects and fills generic fields such as "search", "fill", "query", and "keyword" with random, realistic search terms.
