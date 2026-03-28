@@ -249,7 +249,35 @@ function fillForm(data) {
     findAndFill(['sex', 'gender'], data.gender);
     findAndFill(['dob', 'birth_date', 'date_of_birth'], data.birthDate);
     findAndFill(['email', 'e_mail', 'mail'], data.email);
-    
+
+    // Password: same value for new + confirm fields; avoid keyword "pass" (passport)
+    findAndFill(
+        ['password', 'passwd', 'pwd', 'new_password', 'confirm_password', 'password_confirmation', 'repassword', 'user_password'],
+        data.password,
+        true
+    );
+    const passwordInputs = document.querySelectorAll('input[type="password"]');
+    for (const input of passwordInputs) {
+        if (input.offsetParent !== null && input.value === '') {
+            input.value = data.password;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
+    findAndFill(
+        ['website', 'site_url', 'web_url', 'homepage', 'company_website', 'domain', 'url'],
+        data.website
+    );
+    const urlInputs = document.querySelectorAll('input[type="url"]');
+    for (const input of urlInputs) {
+        if (input.offsetParent !== null && input.value === '') {
+            input.value = data.website;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
     findAndFill(['address', 'street', 'address_line_1', 'address_line_2', 'current_address', 'addr'], data.address);
 
     // Multi-fill for fields like phone number
