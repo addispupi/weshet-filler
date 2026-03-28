@@ -9,12 +9,20 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            width: 100px;
-            padding: 5px;
+            width: 220px;
+            padding: 8px;
             margin: 0;
             text-align: center;
             background-color: transparent;
             color-scheme: light dark;
+        }
+        .button-row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 8px;
+            align-items: stretch;
+            justify-content: center;
         }
         @media (prefers-color-scheme: dark) {
             body {
@@ -28,7 +36,8 @@
             margin: 10px 0;
         }
         button {
-            width: 90%;
+            flex: 1;
+            min-width: 0;
             padding: 5px 10px;
             margin: 0;
             font-size: 16px;
@@ -38,16 +47,38 @@
             background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255, 80, 120, 0.30), transparent 70%), #000000;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, box-shadow 0.2s;
         }
         button:hover {
             background: radial-gradient(ellipse 90% 70% at 50% 10%, rgba(235, 12, 64, 0.60), transparent 70%), #000000;
             box-shadow: 0 1px 4px rgba(0,0,0,0.12);
         }
+        #reset-form-btn {
+            color: #333;
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.22);
+            box-shadow: none;
+        }
+        #reset-form-btn:hover {
+            background: rgba(0, 0, 0, 0.06);
+            box-shadow: none;
+        }
+        @media (prefers-color-scheme: dark) {
+            #reset-form-btn {
+                color: #eee;
+                border-color: rgba(255, 255, 255, 0.28);
+            }
+            #reset-form-btn:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
     </style>
 </head>
 <body>
-    <button id="fill-form-btn">Fill</button>
+    <div class="button-row">
+        <button type="button" id="fill-form-btn">Fill</button>
+        <button type="button" id="reset-form-btn">Reset</button>
+    </div>
 
     <script type="module" src="./js/popup.js"></script>
 </body>

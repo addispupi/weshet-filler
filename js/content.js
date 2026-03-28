@@ -42,11 +42,53 @@ if (!window.weshetFillerRandomSearchTerm) {
 var searchTerms = window.weshetFillerSearchTerms;
 var randomSearchTerm = window.weshetFillerRandomSearchTerm;
 
+function clearFormFields() {
+    const skipInputTypes = new Set(['button', 'submit', 'reset', 'checkbox', 'radio', 'file', 'hidden', 'date']);
+    const elements = document.querySelectorAll('input, textarea, select, tags');
+    for (const el of elements) {
+        if (el.offsetParent === null) continue;
+        const tag = el.tagName.toLowerCase();
+        if (tag === 'textarea') {
+            el.value = '';
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            continue;
+        }
+        if (tag === 'select') {
+            const options = Array.from(el.options);
+            const emptyOpt = options.find(o => o.value === '' && !o.disabled);
+            if (emptyOpt) {
+                el.value = '';
+            } else {
+                const first = options.find(o => !o.disabled);
+                if (first) el.selectedIndex = options.indexOf(first);
+            }
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            continue;
+        }
+        if (tag === 'input') {
+            const t = (el.type || '').toLowerCase();
+            if (skipInputTypes.has(t)) continue;
+            el.value = '';
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            continue;
+        }
+        if (tag === 'tags' && 'value' in el) {
+            el.value = '';
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    // Wait for a message from the popup script
-    if(message.type == "FILL_FORM") {
+    if (message.type == "FILL_FORM") {
         const data = message.data;
         fillForm(data);
+    } else if (message.type == "RESET_FORM") {
+        clearFormFields();
     }
 })
 
