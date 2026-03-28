@@ -41,10 +41,16 @@ function randomPassword(length = 14) {
     return result;
 }
 
-function randomWebsite(firstName, lastName) {
-    const sub = `${firstName}${lastName}`.toLowerCase().replace(/[^a-z0-9]/g, '') || randomString(8).toLowerCase();
+/** Multiple distinct URLs per profile so forms with several website fields can each get a different link. */
+function randomWebsites(firstName, lastName, count = 24) {
+    const base = `${firstName}${lastName}`.toLowerCase().replace(/[^a-z0-9]/g, '') || randomString(8).toLowerCase();
     const hosts = ['example.com', 'example.org', 'testsite.dev', 'sample.io'];
-    return `https://${sub}.${randomFromArray(hosts)}`;
+    const urls = [];
+    for (let i = 0; i < count; i++) {
+        const sub = i === 0 ? base : `${base}-w${i}-${randomString(5).toLowerCase()}`;
+        urls.push(`https://${sub}.${randomFromArray(hosts)}`);
+    }
+    return urls;
 }
 
 const titlesByGender = {
@@ -174,6 +180,13 @@ const DummyData = {
             birthDate: "1990-05-15", 
             email: "akalu.tasew@gmail.com",
             password: "WeshetTest#2024",
+            websites: [
+                "https://example.com",
+                "https://example.org",
+                "https://akalu.testsite.dev",
+                "https://akalu.sample.io",
+                "https://demo.weshet.example.com",
+            ],
             website: "https://example.com",
             phone: "+251 911 234 567",
             address: "Bole Cameron Street",
@@ -242,7 +255,7 @@ for (let i = 0; i < 70; i++) {
 
     const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@example.com`;
     const password = randomPassword();
-    const website = randomWebsite(firstName, lastName);
+    const websites = randomWebsites(firstName, lastName);
     const phone = randomPhone();
     const identityNumber = randomNumberString(16);
     const bankAccountNumber = randomNumberString(10);
@@ -263,7 +276,8 @@ for (let i = 0; i < 70; i++) {
         birthDate,
         email,
         password,
-        website,
+        websites,
+        website: websites[0],
         phone,
         address,
         nationality,
