@@ -179,6 +179,18 @@ function randomPasswordForFill(length = 12) {
     return s;
 }
 
+/** Uses profile email when present; otherwise a plausible @weshet.com address from names (avoids literal "undefined"). */
+function emailForFill(data) {
+    const raw = data.email;
+    if (raw != null && String(raw).trim() !== '') {
+        return String(raw).trim();
+    }
+    const fn = (data.firstName || 'user').toString().toLowerCase().replace(/[^a-z0-9]/g, '') || 'user';
+    const ln = (data.lastName || 'test').toString().toLowerCase().replace(/[^a-z0-9]/g, '') || 'test';
+    const n = Math.floor(Math.random() * 900000) + 100000;
+    return `${fn}.${ln}.${n}@weshet.com`;
+}
+
 function randomHexColor() {
     return '#' + [...Array(6)].map(() => '0123456789abcdef'.charAt(Math.floor(Math.random() * 16))).join('');
 }
@@ -265,7 +277,7 @@ function fillRemainingUnmappedFields(data) {
 
         switch (t) {
             case 'email':
-                el.value = data.email;
+                el.value = emailForFill(data);
                 break;
             case 'tel':
                 el.value = data.phone || randomPhone();
