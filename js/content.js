@@ -165,6 +165,175 @@ function randomSubject() {
     return subjects[Math.floor(Math.random() * subjects.length)];
 }
 
+function dispatchInputEvents(el) {
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+function randomPasswordForFill(length = 12) {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+    let s = '';
+    for (let i = 0; i < length; i++) {
+        s += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return s;
+}
+
+/** Uses profile email when present; otherwise a plausible @weshet.com address from names (avoids literal "undefined"). */
+function emailForFill(data) {
+    const raw = data.email;
+    if (raw != null && String(raw).trim() !== '') {
+        return String(raw).trim();
+    }
+    const fn = (data.firstName || 'user').toString().toLowerCase().replace(/[^a-z0-9]/g, '') || 'user';
+    const ln = (data.lastName || 'test').toString().toLowerCase().replace(/[^a-z0-9]/g, '') || 'test';
+    const n = Math.floor(Math.random() * 900000) + 100000;
+    return `${fn}.${ln}.${n}@weshet.com`;
+}
+
+function randomHexColor() {
+    return '#' + [...Array(6)].map(() => '0123456789abcdef'.charAt(Math.floor(Math.random() * 16))).join('');
+}
+
+function randomDateValue() {
+    const start = new Date(1990, 0, 1);
+    const end = new Date(2005, 11, 31);
+    const d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return d.toISOString().split('T')[0];
+}
+
+function randomDateTimeLocalValue() {
+    const start = new Date(2015, 0, 1);
+    const end = new Date(2024, 11, 31);
+    const d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function fillSelectRandomOption(select) {
+    const options = Array.from(select.options).filter((opt) => !opt.disabled && opt.value !== '');
+    if (options.length === 0) return;
+    const randomIdx = Math.floor(Math.random() * options.length);
+    select.value = options[randomIdx].value;
+    dispatchInputEvents(select);
+}
+
+/**
+ * Fills any still-empty controls that did not match keyword mapping (odd field names, custom ids).
+ * Runs last so mapped fields take precedence.
+ */
+function fillRemainingUnmappedFields(data) {
+    const nextGeneric = (() => {
+        const pool = [
+            data.firstName,
+            data.lastName,
+            data.middleName,
+            data.city,
+            data.region,
+            data.zip,
+            data.woreda,
+            data.houseNumber,
+            data.location,
+            data.nationality,
+            String(Math.floor(Math.random() * 90000) + 10000),
+        ].filter((x) => x != null && x !== '');
+        if (pool.length === 0) pool.push('test');
+        let k = 0;
+        return () => String(pool[k++ % pool.length]);
+    })();
+
+    const all = document.querySelectorAll('input, textarea, select, tags');
+    for (const el of all) {
+        if (el.offsetParent === null) continue;
+        if (el.disabled || el.readOnly) continue;
+
+        const tag = el.tagName.toLowerCase();
+
+        if (tag === 'select') {
+            if (el.value !== '') continue;
+            fillSelectRandomOption(el);
+            continue;
+        }
+
+        if (tag === 'textarea') {
+            if ((el.value || '').trim() !== '') continue;
+            el.value = randomParagraph();
+            dispatchInputEvents(el);
+            continue;
+        }
+
+        if (tag === 'tags' && 'value' in el) {
+            if ((el.value || '').trim() !== '') continue;
+            el.value = nextGeneric();
+            dispatchInputEvents(el);
+            continue;
+        }
+
+        if (tag !== 'input') continue;
+
+        const t = (el.type || 'text').toLowerCase();
+        if (['button', 'submit', 'reset', 'checkbox', 'radio', 'file', 'hidden', 'image'].includes(t)) continue;
+        if ((el.value || '').trim() !== '') continue;
+
+        switch (t) {
+            case 'email':
+                el.value = emailForFill(data);
+                break;
+            case 'tel':
+                el.value = data.phone || randomPhone();
+                break;
+            case 'url':
+                el.value = data.website || 'https://example.com';
+                break;
+            case 'password':
+                el.value = data.password != null ? data.password : randomPasswordForFill();
+                break;
+            case 'number':
+            case 'range': {
+                let min = el.hasAttribute('min') && el.min !== '' ? Number(el.min) : NaN;
+                let max = el.hasAttribute('max') && el.max !== '' ? Number(el.max) : NaN;
+                if (Number.isNaN(min)) min = 0;
+                if (Number.isNaN(max)) max = min + 1000;
+                let n = min + Math.random() * (max - min);
+                const stepAttr = el.hasAttribute('step') && el.step !== '' ? Number(el.step) : NaN;
+                if (!Number.isNaN(stepAttr) && stepAttr > 0) {
+                    n = Math.round(n / stepAttr) * stepAttr;
+                } else if (t === 'range') {
+                    n = Math.round(n);
+                } else {
+                    n = Math.round(n * 100) / 100;
+                }
+                el.value = String(n);
+                break;
+            }
+            case 'date':
+                el.value = data.birthDate || randomDateValue();
+                break;
+            case 'datetime-local':
+                el.value = randomDateTimeLocalValue();
+                break;
+            case 'time': {
+                const h = String(Math.floor(Math.random() * 12) + 8).padStart(2, '0');
+                const m = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+                el.value = `${h}:${m}`;
+                break;
+            }
+            case 'month':
+                el.value = `${1990 + Math.floor(Math.random() * 20)}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}`;
+                break;
+            case 'week':
+                el.value = `${2000 + Math.floor(Math.random() * 20)}-W${String(Math.floor(Math.random() * 52) + 1).padStart(2, '0')}`;
+                break;
+            case 'color':
+                el.value = randomHexColor();
+                break;
+            default:
+                el.value = nextGeneric();
+        }
+        dispatchInputEvents(el);
+    }
+}
+
 const websiteFieldKeywords = ['website', 'site_url', 'web_url', 'homepage', 'company_website', 'domain', 'url'];
 
 function matchesWebsiteKeywords(input) {
@@ -211,15 +380,13 @@ function fillWebsiteFieldsSequential(data) {
         if (tag === 'textarea') {
             if (!matchesWebsiteKeywords(input)) continue;
             input.value = nextUrl();
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
+            dispatchInputEvents(input);
             continue;
         }
         if (tag === 'tags' && 'value' in input) {
             if (!matchesWebsiteKeywords(input)) continue;
             input.value = nextUrl();
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
+            dispatchInputEvents(input);
             continue;
         }
         if (tag !== 'input') continue;
@@ -228,8 +395,7 @@ function fillWebsiteFieldsSequential(data) {
         const isUrlType = t === 'url';
         if (!isUrlType && !matchesWebsiteKeywords(input)) continue;
         input.value = nextUrl();
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        input.dispatchEvent(new Event('change', { bubbles: true }));
+        dispatchInputEvents(input);
     }
 }
 
@@ -390,6 +556,8 @@ function fillForm(data) {
 
     // Subject message filler
     findAndFill(['subject', 'subject_message', 'sendMessage', 'send_message'], randomSubject());
+
+    fillRemainingUnmappedFields(data);
 }
 
 })();
