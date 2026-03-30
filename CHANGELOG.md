@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-03-29
+
+### Added
+-   **Password fields:** Empty password inputs use the profile’s `password` if present; otherwise a generated test password.
+-   **Website / URL fields:** Empty URL inputs use the profile’s website if present; otherwise `https://example.com`.
+-   **Unmapped field fill:** Final pass fills any remaining empty visible fields (excluding `disabled`/`readOnly`) using type‑aware fallbacks (email, tel, date, select, etc.) based on the current profile. Does not overwrite previously filled fields.
+-   **Type-aware fallbacks:** `input` and `change` events are triggered after each field is filled.
+
+---
+
 ## [0.2.2] - 2026-03-28
 
 ### Added
