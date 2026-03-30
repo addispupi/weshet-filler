@@ -11,7 +11,7 @@
 </p>
 
 <div align="center">
-  <a href="https://github.com/your-username/weshet-filler/blob/main/LICENSE">
+  <a href="https://github.com/addispupi/weshet-filler/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
   </a>
   <a href="https://chromewebstore.google.com/detail/ginjmkibemijiejmbpiloljmhgflpeln?utm_source=item-share-cb">
